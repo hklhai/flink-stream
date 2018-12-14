@@ -1,5 +1,6 @@
-package com.hxqh.sell.sellservice;
+package com.hxqh.sell.sellservice.controller;
 
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -22,20 +23,21 @@ import java.io.PrintWriter;
 @Controller
 @RequestMapping("/report")
 public class ReportController {
+
     @Autowired
     private KafkaTemplate kafkaTemplate;
 
     @RequestMapping(value = "/webInfoSJService", method = RequestMethod.POST)
     public void webInfoSJService(@RequestBody String jsonstr, HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("hello ==未转换kafkamessage之前的==" + jsonstr);
+        System.out.println("未转换kafkamessage之前的==" + jsonstr);
 //        KafkaMessage kafkaMessage = new KafkaMessage();
 //        kafkaMessage.setJsonmessage(jsonstr);
 //        kafkaMessage.setCount(1);
 //        kafkaMessage.setTimestamp(new Date().getTime());
 //        jsonstr = JSON.toJSONString(kafkaMessage);
-//        System.out.println("hello Jin来了==转换kafkamessage之后的=="+jsonstr);
+        System.out.println("转换kafkamessage之后的==" + jsonstr);
         // 业务开始
-        // kafkaTemplate.send("test1", "key", jsonstr);
+        kafkaTemplate.send("test", "key", jsonstr);
         // 业务结束
         PrintWriter printWriter = getWriter(response);
         response.setStatus(HttpStatus.OK.value());

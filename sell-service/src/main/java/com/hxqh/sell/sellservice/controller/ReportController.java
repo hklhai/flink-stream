@@ -27,6 +27,20 @@ public class ReportController {
     @Autowired
     private KafkaTemplate kafkaTemplate;
 
+    /**
+     *
+     * -- 启动
+     * ./kafka-server-start.sh ../config/server.properties
+     * -- 创建topic
+     * kafka-topics.sh --create --zookeeper=127.0.0.1:2181 --partitions 1 --replication-factor 1 --topic test
+     *
+     * kafka-console-producer.sh --broker-list 127.0.0.1:9092  --topic test
+     * kafka-console-consumer.sh --zookeeper 127.0.0.1:2181 --topic test
+     *
+     * @param jsonstr
+     * @param request
+     * @param response
+     */
     @RequestMapping(value = "/webInfoSJService", method = RequestMethod.POST)
     public void webInfoSJService(@RequestBody String jsonstr, HttpServletRequest request, HttpServletResponse response) {
         System.out.println("未转换kafkamessage之前的==" + jsonstr);

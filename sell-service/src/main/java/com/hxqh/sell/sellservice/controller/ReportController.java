@@ -1,6 +1,8 @@
 package com.hxqh.sell.sellservice.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.hxqh.common.input.KafkaMessage;
+import com.hxqh.common.log.UserscanLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.Date;
 
 /**
  * Created by Ocean lin on 2018/12/12.
@@ -28,12 +31,11 @@ public class ReportController {
     private KafkaTemplate kafkaTemplate;
 
     /**
-     *
      * -- 启动
      * ./kafka-server-start.sh ../config/server.properties
      * -- 创建topic
      * kafka-topics.sh --create --zookeeper=127.0.0.1:2181 --partitions 1 --replication-factor 1 --topic test
-     *
+     * <p>
      * kafka-console-producer.sh --broker-list 127.0.0.1:9092  --topic test
      * kafka-console-consumer.sh --zookeeper 127.0.0.1:2181 --topic test
      *
@@ -44,11 +46,12 @@ public class ReportController {
     @RequestMapping(value = "/webInfoSJService", method = RequestMethod.POST)
     public void webInfoSJService(@RequestBody String jsonstr, HttpServletRequest request, HttpServletResponse response) {
         System.out.println("未转换kafkamessage之前的==" + jsonstr);
-//        KafkaMessage kafkaMessage = new KafkaMessage();
-//        kafkaMessage.setJsonmessage(jsonstr);
-//        kafkaMessage.setCount(1);
-//        kafkaMessage.setTimestamp(new Date().getTime());
-//        jsonstr = JSON.toJSONString(kafkaMessage);
+        KafkaMessage kafkaMessage = new KafkaMessage();
+        kafkaMessage.setJsonmessage(jsonstr);
+        kafkaMessage.setCount(1);
+        kafkaMessage.setTimestamp(System.currentTimeMillis());
+        jsonstr = JSON.toJSONString(kafkaMessage);
+
         System.out.println("转换kafkamessage之后的==" + jsonstr);
         // 业务开始
         kafkaTemplate.send("test", "key", jsonstr);

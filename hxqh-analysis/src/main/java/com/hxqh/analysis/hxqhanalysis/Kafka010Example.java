@@ -55,12 +55,13 @@ import javax.annotation.Nullable;
  * kafka-console-producer.sh --broker-list 192.168.89.129:9092 --topic test2
  * <p>
  * kafka-console-consumer.sh --zookeeper 192.168.89.129:2181 --topic test4
- *
+ * <p>
  * producer 需要使用真实IP地址，127.0.0.1无法接受消息
  *
  * @author Lin
  */
 public class Kafka010Example {
+    private final static Integer NUM = 5;
 
     public static void main(String[] args) throws Exception {
         args = new String[]{"--input-topic", "test2", "--output-topic", "test4", "--bootstrap.servers", "192.168.89.129:9092",
@@ -68,7 +69,7 @@ public class Kafka010Example {
         // parse input arguments
         final ParameterTool parameterTool = ParameterTool.fromArgs(args);
 
-        if (parameterTool.getNumberOfParameters() < 5) {
+        if (parameterTool.getNumberOfParameters() < NUM) {
             System.out.println("Missing parameters!\n" +
                     "Usage: Kafka --input-topic <topic> --output-topic <topic> " +
                     "--bootstrap.servers <kafka brokers> " +

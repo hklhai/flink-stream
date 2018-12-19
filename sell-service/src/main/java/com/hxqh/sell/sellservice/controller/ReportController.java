@@ -54,7 +54,7 @@ public class ReportController {
 
         System.out.println("转换kafkamessage之后的==" + jsonstr);
         // 业务开始
-        kafkaTemplate.send("test", "key", jsonstr);
+        kafkaTemplate.send("hk", "key", jsonstr);
         // 业务结束
         PrintWriter printWriter = getWriter(response);
         response.setStatus(HttpStatus.OK.value());

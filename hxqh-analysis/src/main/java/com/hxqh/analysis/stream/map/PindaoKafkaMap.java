@@ -19,10 +19,10 @@ public class PindaoKafkaMap extends RichMapFunction<KafkaMessage, PindaoRD> {
         UserscanLog userscanLog = JSON.parseObject(jsonmessage, UserscanLog.class);
         Long pingdaoid = userscanLog.getPingdaoid();
         int count = value.getCount();
-
         PindaoRD pindaoRD = new PindaoRD();
         pindaoRD.setPingdaoid(pingdaoid);
         pindaoRD.setCount(Long.valueOf(count + ""));
+        System.out.println("=======" + pingdaoid);
         return pindaoRD;
     }
 }

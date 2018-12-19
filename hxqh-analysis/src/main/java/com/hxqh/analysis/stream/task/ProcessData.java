@@ -25,8 +25,8 @@ import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer010;
 public class ProcessData {
     private final static Integer NUM = 4;
 
-    public static void main(String[] args) throws Exception {
-        args = new String[]{"--input-topic", "test", "--bootstrap.servers", "192.168.89.129:9092",
+    public static void main(String[] args) {
+        args = new String[]{"--input-topic", "hk", "--bootstrap.servers", "192.168.89.129:9092",
                 "--zookeeper.connect", "192.168.89.129:2181", "--group.id", "myconsumer1"};
 
         final ParameterTool parameterTool = ParameterTool.fromArgs(args);
@@ -61,11 +61,15 @@ public class ProcessData {
         pingdaoid.addSink(new SinkFunction<PindaoRD>() {
             @Override
             public void invoke(PindaoRD value) throws Exception {
+                System.out.println("==========pingdaoid:" + value.getPingdaoid());
                 RedisUtil.jedis.lpush("pingdaoid:" + value.getPingdaoid(), value.getCount() + "");
             }
-        });
+        }).name("pingdao-Sink");
 
-
-        env.execute("pindaoRd");
+        try {
+            env.execute("pindaoRd");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

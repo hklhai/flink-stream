@@ -6,12 +6,13 @@
         <groupId>org.apache.flink</groupId>
         <artifactId>flink-examples</artifactId>
         <version>1.6.1</version>
+        <relativePath>..</relativePath>
     </parent>
+
     <groupId>com.hxqh.analysis</groupId>
     <artifactId>hxqh-analysis</artifactId>
     <name>hxqh-analysis</name>
     <description>Flink-Analysis</description>
-
     <properties>
         <java.version>1.8</java.version>
         <scala.version>2.11.12</scala.version>
@@ -64,17 +65,39 @@
         <plugins>
             <!-- 执行mvn clean assembly:assembly 生成jar包 -->
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.3</version>
                 <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>youfan</mainClass>
-                        </manifest>
-                    </archive>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.hxqh.analysis</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.17</version>
+                <executions>
+                    <execution>
+                        <id>checkstyle</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                            <failsOnError>true</failsOnError>
+                            <failOnViolation>true</failOnViolation>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
         <resources>

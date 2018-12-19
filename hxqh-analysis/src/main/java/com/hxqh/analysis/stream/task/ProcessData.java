@@ -5,6 +5,7 @@ import com.hxqh.analysis.stream.map.PindaoKafkaMap;
 import com.hxqh.analysis.stream.reduce.PindaoReduce;
 import com.hxqh.analysis.stream.transfer.KafkaMessageSchema;
 import com.hxqh.analysis.stream.transfer.KafkaMessageWatermarks;
+import com.hxqh.analysis.utils.RedisUtil;
 import com.hxqh.common.analysis.PindaoRD;
 import com.hxqh.common.input.KafkaMessage;
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
@@ -12,6 +13,7 @@ import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.streaming.api.functions.sink.SinkFunction;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer010;
 
 
@@ -55,7 +57,15 @@ public class ProcessData {
 
         DataStream<PindaoRD> kafkaMessageMap = input.map(new PindaoKafkaMap());
         DataStream<PindaoRD> pingdaoid = kafkaMessageMap.keyBy("pingdaoid").countWindow(10, 5).reduce(new PindaoReduce());
-        pingdaoid.print();
+        // pingdaoid.print();
+        pingdaoid.addSink(new SinkFunction<PindaoRD>() {
+            @Override
+            public void invoke(PindaoRD value) throws Exception {
+                RedisUtil.jedis.lpush("pingdaoid:" + value.getPingdaoid(), value.getCount() + "");
+            }
+        });
+
+
         env.execute("pindaoRd");
     }
 }

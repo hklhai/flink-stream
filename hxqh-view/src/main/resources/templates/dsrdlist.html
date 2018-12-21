@@ -2,16 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
+    <title>排名显示</title>
 </head>
 
-<span th:text="${test}"></span>
+<!--<span th:text="${test}"></span>-->
 <body>
-Hello World!
-<!--<table>-->
-    <!--<tr th:each="pindaoid:${result}">-->
-        <!--<td>${pindaoid}</td>-->
-    <!--</tr>-->
-<!--</table>-->
+<!--Hello World!-->
+<table>
+    <tr th:each="e:${result}">
+        <td th:text="${e}"></td>
+    </tr>
+</table>
 </body>
 </html>

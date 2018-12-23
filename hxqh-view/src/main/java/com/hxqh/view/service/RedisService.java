@@ -94,15 +94,15 @@ public class RedisService {
      *
      * @param
      */
-    public Map<String, List<String>> getAllData(String parentkey) {
-        Map<String, List<String>> resultmap = new HashMap<>(50);
-        Set<String> setdata = stringRedisTemplate.keys(parentkey + "*");
+    public Map<String, List<String>> getAllData(String prefix) {
+        Map<String, List<String>> resultMap = new HashMap<>(50);
+        Set<String> setdata = stringRedisTemplate.keys(prefix + "*");
 
         for (String key : setdata) {
-            List<String> list = stringRedisTemplate.opsForList().range(key, 0L, 200L);
-            resultmap.put(key, list);
+            List<String> list = stringRedisTemplate.opsForList().range(key, 0L, 100L);
+            resultMap.put(key, list);
         }
-        return resultmap;
+        return resultMap;
     }
 
 }

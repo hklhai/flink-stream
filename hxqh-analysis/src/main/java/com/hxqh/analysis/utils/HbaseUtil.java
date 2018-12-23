@@ -19,12 +19,15 @@ public class HbaseUtil {
     private static Admin admin = null;
     private static Connection conn = null;
 
+    private static String HBASE_ROOTDIR = "hdfs://192.168.89.129:9000/hbase";
+    private static String HBASE_ZOOKEEPER = "192.168.89.129";
+
     static {
         // 创建hbase配置对象
         Configuration conf = HBaseConfiguration.create();
-        conf.set("hbase.rootdir", "hdfs://192.168.253.151:9000/hbase");
+        conf.set("hbase.rootdir", HBASE_ROOTDIR);
         //使用eclipse时必须添加这个，否则无法定位
-        conf.set("hbase.zookeeper.quorum", "192.168.253.151");
+        conf.set("hbase.zookeeper.quorum", HBASE_ZOOKEEPER);
         conf.set("hbase.client.scanner.timeout.period", "600000");
         conf.set("hbase.rpc.timeout", "600000");
         try {
@@ -62,8 +65,8 @@ public class HbaseUtil {
             Set<Map.Entry<String, String>> set = datamap.entrySet();
             for (Map.Entry<String, String> entry : set) {
                 String key = entry.getKey();
-                Object value = entry.getValue();
-                put.addColumn(Bytes.toBytes(famliyname), Bytes.toBytes(key), Bytes.toBytes(value + ""));
+                String value = entry.getValue();
+                put.addColumn(Bytes.toBytes(famliyname), Bytes.toBytes(key), Bytes.toBytes(value));
             }
         }
         table.put(put);

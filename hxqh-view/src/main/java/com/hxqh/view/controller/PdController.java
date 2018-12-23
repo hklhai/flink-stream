@@ -21,18 +21,25 @@ public class PdController {
     @Autowired
     private RedisService redisService;
 
+    /**
+     * http://127.0.0.1:8999/pd/list?topnum=8
+     * http://127.0.0.1:8999/pd/list?topnum=3
+     *
+     * @param model
+     * @param topnum
+     * @return
+     */
     @RequestMapping("list")
-    public String list(Model model) {
+    public String list(Model model, Integer topnum) {
 //         String test = redisService.getStr("test");
 //         model.addAttribute("test", test);
-        int topnum = 10;
 
         Map<String, List<String>> map = redisService.getAllData("pingdaoid");
         Set<Map.Entry<String, List<String>>> set = map.entrySet();
         Map<Long, String> sortmap = new TreeMap<Long, String>(new Comparator() {
             @Override
             public int compare(Object o1, Object o2) {
-                return Integer.valueOf((long) o1 - (long) o2 + "");
+                return Integer.valueOf((long) o2 - (long) o1 + "");
             }
         });
 
@@ -43,6 +50,7 @@ public class PdController {
             for (String o : list) {
                 total += Long.valueOf(o);
             }
+            // 总数有相同的ID
             if (sortmap.get(total) != null) {
                 String pindaoidtemp = sortmap.get(total);
                 sortmap.put(total, pindaoidtemp + "," + pindaoid);

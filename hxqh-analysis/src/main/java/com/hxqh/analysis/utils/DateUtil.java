@@ -10,17 +10,17 @@ import java.util.Date;
  */
 public class DateUtil {
 
-    public static String getDateby(long timestamp, String dateformat) {
+    public static String getDateby(long timestamp, String dateString) {
         Date date = new Date(timestamp);
-        DateFormat dateFormat = new SimpleDateFormat(dateformat);
+        DateFormat dateFormat = new SimpleDateFormat(dateString);
         String formatdate = dateFormat.format(date);
         return formatdate;
     }
 
 
-    public static long getDatebyConditon(long timestamp, String dateformat) throws ParseException {
+    public static long getDateByCondition(long timestamp, String dateString) throws ParseException {
         Date datetemp = new Date(timestamp);
-        DateFormat dateFormat = new SimpleDateFormat(dateformat);
+        DateFormat dateFormat = new SimpleDateFormat(dateString);
         String formatdate = dateFormat.format(datetemp);
         Date date = dateFormat.parse(formatdate);
         return date.getTime();

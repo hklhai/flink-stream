@@ -37,6 +37,7 @@ public class PindaoPvUvMap implements FlatMapFunction<KafkaMessage, PidaoPvUv> {
         boolean isFisrtday = userState.isFisrtday();
         boolean isFisrtmonth = userState.isFisrtmonth();
 
+        // flatMap 将一个对象拆分为3个对象，属于不同年、不同月、不同日
         PidaoPvUv pidaoPvUv = new PidaoPvUv();
         pidaoPvUv.setPingdaoid(pingdaoid);
         pidaoPvUv.setUserid(userid);

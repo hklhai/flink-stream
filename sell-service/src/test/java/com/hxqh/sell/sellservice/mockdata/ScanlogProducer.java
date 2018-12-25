@@ -103,5 +103,6 @@ public class ScanlogProducer {
             System.out.println(jonstr);
             UrlSendUtil.sendmessage("http://127.0.0.1:8888/report/webInfoSJService", jonstr);
         }
+
     }
 }

@@ -54,7 +54,10 @@ public class HbaseUtil {
     }
 
     /**
-     * 插入数据，create "baseuserscaninfo","time"
+     * 插入数据
+     * <p>
+     * create "baseuserscaninfo","time"
+     * create "pindaoinfo","info"
      */
     public static void put(String tablename, String rowkey, String famliyname, Map<String, String> datamap) throws Exception {
         Table table = conn.getTable(TableName.valueOf(tablename));
@@ -75,21 +78,22 @@ public class HbaseUtil {
     }
 
     /**
-     * 获取数据，create "baseuserscaninfo","time"
+     * 获取数据
+     * create "baseuserscaninfo","time"
      * create "pindaoinfo","info"
      */
-    public static String getdata(String tablename, String rowkey, String famliyname, String colum) throws Exception {
+    public static String getdata(String tablename, String rowkey, String famliyName, String column) throws Exception {
         Table table = conn.getTable(TableName.valueOf(tablename));
         // 将字符串转换成byte[]
         byte[] rowkeybyte = Bytes.toBytes(rowkey);
         Get get = new Get(rowkeybyte);
         Result result = table.get(get);
-        byte[] resultbytes = result.getValue(famliyname.getBytes(), colum.getBytes());
-        if (resultbytes == null) {
+        byte[] resultBytes = result.getValue(famliyName.getBytes(), column.getBytes());
+        if (resultBytes == null) {
             return null;
         }
 
-        return new String(resultbytes);
+        return new String(resultBytes);
     }
 
     /**

@@ -12,7 +12,6 @@ public class PvUvReduce implements ReduceFunction<PidaoPvUv> {
 
     @Override
     public PidaoPvUv reduce(PidaoPvUv value1, PidaoPvUv value2) throws Exception {
-
         long pvcountvalue1 = value1.getPvcount();
         long uvcountvalue1 = value1.getUvcount();
         long pvcountvalue2 = value2.getPvcount();

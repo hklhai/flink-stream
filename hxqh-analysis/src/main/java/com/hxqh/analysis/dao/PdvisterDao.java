@@ -23,6 +23,7 @@ public class PdvisterDao {
      */
     public static UserState getUserSatebyvistertime(String userid, long timestamp) {
         UserState userState = new UserState();
+
         try {
             String result = HbaseUtil.getdata("baseuserscaninfo", userid, "time", "firstvisittime");
             //第一次访问

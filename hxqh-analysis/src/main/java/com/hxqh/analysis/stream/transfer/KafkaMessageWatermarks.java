@@ -23,7 +23,7 @@ public class KafkaMessageWatermarks implements AssignerWithPeriodicWatermarks<Ka
     @Nullable
     @Override
     public Watermark getCurrentWatermark() {
-        Watermark watermark = new Watermark(currentTimestamp == Long.MIN_VALUE ? Long.MIN_VALUE : currentTimestamp - 1);
+        Watermark watermark = new Watermark(currentTimestamp == Long.MIN_VALUE ? Long.MIN_VALUE : currentTimestamp -1);
         return watermark;
     }
 

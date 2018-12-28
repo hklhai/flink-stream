@@ -79,7 +79,7 @@ public class ScanlogProducer {
 
     public static void main(String[] args) {
         Random random = new Random();
-        for (int i = 0; i < 200; i++) {
+        for (int i = 0; i < 20; i++) {
             //频道id 类别id 产品id 用户id 打开时间 离开时间 地区 网络方式 来源方式 浏览器
             UserscanLog userscanLog = new UserscanLog();
             userscanLog.setPingdaoid(pindaoids[random.nextInt(pindaoids.length)]);

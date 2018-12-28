@@ -16,6 +16,7 @@ import java.util.Map;
 public class PindaoPvUvSink implements SinkFunction<PidaoPvUv> {
     @Override
     public void invoke(PidaoPvUv value, Context context) throws Exception {
+        System.out.println("++++++++++++++++++++++PidaoPvUv:"+value);
         long pingdaoid = value.getPingdaoid();
         long pvcount = value.getPvcount();
         long uvcount = value.getUvcount();

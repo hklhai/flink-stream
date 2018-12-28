@@ -17,6 +17,20 @@ public class PvUvReduce implements ReduceFunction<PidaoPvUv> {
         long pvcountvalue2 = value2.getPvcount();
         long uvcountvalue2 = value2.getUvcount();
 
+//        long pingdaoid = value1.getPingdaoid();
+//        long timestampvalue = value1.getTimestamp();
+//        String timestring = value1.getTimestring();
+//
+//        PidaoPvUv pidaoPvUv = new PidaoPvUv();
+//        pidaoPvUv.setPingdaoid(pingdaoid);
+//        pidaoPvUv.setTimestamp(timestampvalue);
+//        pidaoPvUv.setTimestring(timestring);
+//
+//        pidaoPvUv.setPvcount(pvcountvalue1 + pvcountvalue2);
+//        pidaoPvUv.setUvcount(uvcountvalue1 + uvcountvalue2);
+//        System.out.println("recuduce --pidaoPvUv==" + pidaoPvUv);
+//        return pidaoPvUv;
+
         value1.setPvcount(pvcountvalue1 + pvcountvalue2);
         value1.setUvcount(uvcountvalue1 + uvcountvalue2);
 

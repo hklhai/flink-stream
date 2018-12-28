@@ -24,9 +24,9 @@ public class PvUvProcess {
     private final static Integer NUM = 5;
 
     public static void main(String[] args) {
-        args = new String[]{"--input-topic", "hk", "--bootstrap.servers", "192.168.89.129:9092",
-                "--zookeeper.connect", "192.168.89.129:2181", "--group.id", "myconsumer1",
-                "--group.id", "myconsumer1", "--windows.size", "50"};
+//        args = new String[]{"--input-topic", "hk", "--bootstrap.servers", "192.168.89.129:9092",
+//                "--zookeeper.connect", "192.168.89.129:2181", "--group.id", "myconsumer1",
+//                "--group.id", "myconsumer1", "--windows.size", "2"};
 
         final ParameterTool parameterTool = ParameterTool.fromArgs(args);
 
@@ -56,12 +56,12 @@ public class PvUvProcess {
 
         DataStream<PidaoPvUv> kafkaMessageMap = input.flatMap(new PindaoPvUvMap());
 
-        DataStream<PidaoPvUv> reduce = kafkaMessageMap.keyBy("groupbyfield").
-                countWindow(Long.valueOf(parameterTool.getRequired("windows.size"))).reduce(new PvUvReduce());
+        DataStream<PidaoPvUv> reduce = kafkaMessageMap.keyBy("groupbyfield").countWindow(Long.valueOf(parameterTool.getRequired("windows.size")))
+                .reduce(new PvUvReduce());
+        reduce.addSink(new PindaoPvUvSink()).name("pdpvuvreduce");
 
-        reduce.addSink(new PindaoPvUvSink()).name("pingdao-PvUv");
         try {
-            env.execute("pingdaoPvUv");
+            env.execute("PvUvProcess");
         } catch (Exception e) {
             e.printStackTrace();
         }

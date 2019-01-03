@@ -1,11 +1,11 @@
 package com.hxqh.analysis.stream.task;
 
-import com.hxqh.analysis.stream.map.PindaoFreshnessMap;
-import com.hxqh.analysis.stream.reduce.FreshnessReduce;
-import com.hxqh.analysis.stream.sink.PindaoFreshnessSink;
+import com.hxqh.analysis.stream.map.RealTimeAreaMap;
+import com.hxqh.analysis.stream.reduce.RealTimeAreaReduce;
+import com.hxqh.analysis.stream.sink.RealTimeAreaSink;
 import com.hxqh.analysis.stream.transfer.KafkaMessageSchema;
 import com.hxqh.analysis.stream.transfer.KafkaMessageWatermarks;
-import com.hxqh.common.analysis.PidaoFreshness;
+import com.hxqh.common.analysis.RealTimeArea;
 import com.hxqh.common.input.KafkaMessage;
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.java.utils.ParameterTool;
@@ -15,11 +15,11 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer010;
 
 /**
- * Created by Ocean lin on 2018/12/28.
+ * Created by Ocean lin on 2019/1/2.
  *
  * @author Ocean lin
  */
-public class FreshnessProcess {
+public class RealTimeAreaProcess {
 
     private final static Integer NUM = 5;
 
@@ -54,14 +54,14 @@ public class FreshnessProcess {
         DataStream<KafkaMessage> input = env.addSource(
                 flinkKafkaConsumer.assignTimestampsAndWatermarks(new KafkaMessageWatermarks()));
 
-        DataStream<PidaoFreshness> kafkaMessageMap = input.flatMap(new PindaoFreshnessMap());
+        DataStream<RealTimeArea> kafkaMessageMap = input.flatMap(new RealTimeAreaMap());
 
-        DataStream<PidaoFreshness> reduce = kafkaMessageMap.keyBy("groupbyfield").countWindow(Long.valueOf(parameterTool.getRequired("windows.size")))
-                .reduce(new FreshnessReduce());
-        reduce.addSink(new PindaoFreshnessSink()).name("PindaoFreshnessSink");
+        DataStream<RealTimeArea> reduce = kafkaMessageMap.keyBy("groupbyfield").countWindow(Long.valueOf(parameterTool.getRequired("windows.size")))
+                .reduce(new RealTimeAreaReduce());
+        reduce.addSink(new RealTimeAreaSink()).name("RealTimeAreaSink");
 
         try {
-            env.execute("FreshnessProcess");
+            env.execute("RealTimeAreaProcess");
         } catch (Exception e) {
             e.printStackTrace();
         }

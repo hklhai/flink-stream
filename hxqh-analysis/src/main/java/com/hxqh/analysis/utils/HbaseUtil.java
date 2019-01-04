@@ -81,6 +81,8 @@ public class HbaseUtil {
      * 获取数据
      * create "baseuserscaninfo","time"
      * create "pindaoinfo","info"
+     * create "userinfo","info"
+     *
      */
     public static String getdata(String tablename, String rowkey, String famliyName, String column) throws Exception {
         Table table = conn.getTable(TableName.valueOf(tablename));

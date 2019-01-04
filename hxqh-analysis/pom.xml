@@ -142,6 +142,10 @@
                     <include>**/*</include>
                 </includes>
                 <filtering>true</filtering>
+                <excludes>
+                    <exclude>db/*</exclude>
+                    <exclude>hive/*</exclude>
+                </excludes>
             </resource>
         </resources>
     </build>

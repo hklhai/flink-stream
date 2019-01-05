@@ -1,0 +1,15 @@
+sqoop import --connect jdbc:mysql://192.168.89.129:3306/hk --username root --password mysql --table cartinfo --fields-terminated-by '\t'  --null-string '**'  --target-dir /user/hive/warehouse/cartinfo/1  --hive-table cartinfo --m 1 --hive-import
+
+sqoop import --connect jdbc:mysql://192.168.89.129:3306/hk --username root --password mysql --table sale --fields-terminated-by '\t'  --null-string  '**' --target-dir /user/hive/warehouse/sale/1  --hive-table sale --m 1 --hive-import
+
+sqoop import --connect jdbc:mysql://192.168.89.129:3306/hk --username root --password mysql --table merchant --fields-terminated-by '\t'  --null-string '**' --target-dir /user/hive/warehouse/merchant/1  --hive-table merchant --m 1 --hive-import
+
+sqoop import --connect jdbc:mysql://192.168.89.129:3306/hk --username root --password mysql --table merchantshop --fields-terminated-by '\t'  --null-string '**'  --target-dir /user/hive/warehouse/merchantshop/1  --hive-table merchantshop --m 1 --hive-import
+
+sqoop import --connect jdbc:mysql://192.168.89.129:3306/hk --username root --password mysql --table order --fields-terminated-by '\t'  --null-string '**'  --target-dir /user/hive/warehouse/order/1  --hive-table order --m 1 --hive-import
+
+sqoop import --connect jdbc:mysql://192.168.89.129:3306/hk --username root --password mysql --table product --fields-terminated-by '\t'  --null-string '**' --target-dir /user/hive/warehouse/product/1  --hive-table product --m 1 --hive-import
+
+sqoop import --connect jdbc:mysql://192.168.89.129:3306/hk --username root --password mysql --table producttype --fields-terminated-by '\t'  --null-string '**'  --target-dir /user/hive/warehouse/producttype/1  --hive-table producttype --m 1 --hive-import
+
+sqoop import --connect jdbc:mysql://192.168.89.129:3306/hk --username root --password mysql --table userinfo --fields-terminated-by '\t'  --null-string '**' --target-dir /user/hive/warehouse/userinfo/1  --hive-table userinfo --m 1 --hive-import

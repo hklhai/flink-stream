@@ -1,4 +1,4 @@
-CREATE TABLE cartinfo (userid string,productid string,	num string,	productamount string,	createtime string,merchantid string) ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
+CREATE TABLE cartinfo (cartid String,userid string,productid string,	num string,	productamount string,	createtime string,merchantid string) ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
 
 CREATE TABLE sale(saleid string, salename string,salestarttime string,saleendtime string,productid string) ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t';
 

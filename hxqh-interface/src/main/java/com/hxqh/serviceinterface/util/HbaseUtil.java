@@ -1,4 +1,4 @@
-package com.hxqh.analysis.utils;
+package com.hxqh.serviceinterface.util;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;

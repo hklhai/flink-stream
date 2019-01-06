@@ -145,6 +145,7 @@
                 <excludes>
                     <exclude>db/*</exclude>
                     <exclude>hive/*</exclude>
+                    <exclude>sqoop/*</exclude>
                 </excludes>
             </resource>
         </resources>

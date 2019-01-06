@@ -8,18 +8,46 @@
         <version>1.5.13.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.hxqh.view</groupId>
-    <artifactId>hxqh-view</artifactId>
-    <version>1.0</version>
-    <name>hxqh-view</name>
-    <description>Hxqh View Project</description>
+
+    <groupId>com.hxqh.serviceinterface</groupId>
+    <artifactId>hxqh-interface</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>hxqh-interface</name>
+    <description>Demo project for Spring Boot</description>
+
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Central Repository</name>
+            <!--<url>http://repo1.maven.org/maven2/</url>-->
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>Nexus</id>
+            <name>Nexus Repository</name>
+            <url>https://repository.cloudera.com/content/repositories/releases/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <spring-cloud.version>Finchley.SR1</spring-cloud.version>
     </properties>
+
 
     <dependencies>
         <dependency>
@@ -60,6 +88,16 @@
             <version>1.5.6.RELEASE</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-client</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-server</artifactId>
+            <version>1.0.0-cdh5.5.1</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-eureka</artifactId>
             <version>1.4.6.RELEASE</version>
@@ -82,8 +120,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-
 
     <build>
         <plugins>

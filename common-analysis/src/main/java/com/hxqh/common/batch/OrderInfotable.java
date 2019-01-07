@@ -9,17 +9,32 @@ public class OrderInfotable {
 
     public String orderid;
     public String userid;
-    public String  mechartid;
+    public String  merchantid;
     public double  orderamount;
     public String paytype;
     public String paytime;
-    public String hbamount;
-    public String djjamount;
+    public String red;
+    public String cashcoupon;
     public String productid;
-    public String huodongnumber;
+    public String saleid;
     public String createtime;
 
+
     public OrderInfotable() {
+    }
+
+    public OrderInfotable(String orderid, String userid, String merchantid, double orderamount, String paytype, String paytime, String red, String cashcoupon, String productid, String saleid, String createtime) {
+        this.orderid = orderid;
+        this.userid = userid;
+        this.merchantid = merchantid;
+        this.orderamount = orderamount;
+        this.paytype = paytype;
+        this.paytime = paytime;
+        this.red = red;
+        this.cashcoupon = cashcoupon;
+        this.productid = productid;
+        this.saleid = saleid;
+        this.createtime = createtime;
     }
 
     public String getOrderid() {
@@ -38,12 +53,12 @@ public class OrderInfotable {
         this.userid = userid;
     }
 
-    public String getMechartid() {
-        return mechartid;
+    public String getMerchantid() {
+        return merchantid;
     }
 
-    public void setMechartid(String mechartid) {
-        this.mechartid = mechartid;
+    public void setMerchantid(String merchantid) {
+        this.merchantid = merchantid;
     }
 
     public double getOrderamount() {
@@ -70,20 +85,20 @@ public class OrderInfotable {
         this.paytime = paytime;
     }
 
-    public String getHbamount() {
-        return hbamount;
+    public String getRed() {
+        return red;
     }
 
-    public void setHbamount(String hbamount) {
-        this.hbamount = hbamount;
+    public void setRed(String red) {
+        this.red = red;
     }
 
-    public String getDjjamount() {
-        return djjamount;
+    public String getCashcoupon() {
+        return cashcoupon;
     }
 
-    public void setDjjamount(String djjamount) {
-        this.djjamount = djjamount;
+    public void setCashcoupon(String cashcoupon) {
+        this.cashcoupon = cashcoupon;
     }
 
     public String getProductid() {
@@ -94,12 +109,12 @@ public class OrderInfotable {
         this.productid = productid;
     }
 
-    public String getHuodongnumber() {
-        return huodongnumber;
+    public String getSaleid() {
+        return saleid;
     }
 
-    public void setHuodongnumber(String huodongnumber) {
-        this.huodongnumber = huodongnumber;
+    public void setSaleid(String saleid) {
+        this.saleid = saleid;
     }
 
     public String getCreatetime() {

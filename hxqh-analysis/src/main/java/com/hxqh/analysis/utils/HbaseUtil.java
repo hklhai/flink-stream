@@ -83,6 +83,7 @@ public class HbaseUtil {
      * create "pindaoinfo","info"
      * create "userinfo","info"
      * create "productinfo","info"
+     * create "orderinfo","info"
      *
      */
     public static String getdata(String tablename, String rowkey, String famliyName, String column) throws Exception {
